@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Avis;
 import com.example.demo.entity.Reclamation;
-import com.example.demo.service.CrudRestClient;
+import com.example.demo.service.CrudRestService;
 
 @RestController
 public class ClientController {
 
 	@Autowired
-	private CrudRestClient crudRest;
+	private CrudRestService crudRest;
 	
 	
 	@PostMapping("/avis")
