@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.entity.Article;
 import com.example.demo.entity.Avis;
+import com.example.demo.entity.Commande;
 import com.example.demo.entity.Reclamation;
 import org.springframework.hateoas.Resources;
 
 
 
 
-@FeignClient(name = "CrudApplication" , url = "http://localhost:8011/CrudApplication")
+@FeignClient(name = "CrudApplication" )
 public interface CrudRestClient {
 	
 	@GetMapping("/getproduct/{id}")
@@ -50,7 +51,8 @@ public interface CrudRestClient {
 	
 	@DeleteMapping("/reclamation/{id}")
 	public void deleteReclamationById(@PathVariable("id") String id);
-	
+	@PostMapping("/commande")
+	public Commande postCommande (@RequestBody Commande commande);
 	
 	
 	

@@ -9,13 +9,13 @@ import com.example.demo.entity.Article;
 import com.example.demo.entity.Avis;
 import com.example.demo.entity.Commande;
 import com.example.demo.entity.Reclamation;
-import com.example.demo.service.CrudRestService;
+import com.example.demo.service.CrudRestClient;
 
 @RestController
 public class ClientController {
 
 	@Autowired
-	private CrudRestService crudRest;
+	private CrudRestClient crudRest;
 	
 	
 	@PostMapping("/avis")
