@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Article;
 import com.example.demo.entity.Avis;
-
+import com.example.demo.entity.Commande;
 import com.example.demo.entity.Reclamation;
 import com.example.demo.service.CrudRestClient;
 
@@ -81,7 +81,22 @@ public class ClientController {
 	public void deleteReclamationById(@PathVariable("id") String id){
 		crudRest.deleteReclamationById(id);
 	}
-	
+	@PostMapping("/addcommande")
+	public Commande addCommande (@RequestBody Commande commande) {
+		Commande cmd = new Commande();
+		cmd.setIdCmd(commande.getIdCmd());
+		cmd.setDateCmd(commande.getDateCmd());
+		cmd.setTotalCmd(commande.getTotalCmd());
+		cmd.setModePaiement(commande.getModePaiement());
+		cmd.setLigneCmd(commande.getLigneCmd());
+		cmd.setClientCmd(commande.getClientCmd());
+		cmd.setLigneLivraisonCmd(commande.getLigneLivraisonCmd());
+
+
+		
+		crudRest.postCommande(cmd);
+		return cmd ;
+	}
 	
 	
 	
