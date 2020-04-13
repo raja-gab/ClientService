@@ -17,6 +17,8 @@ public class Avis {
 	private String avis ; 
 	private LocalDate dateAvis ; 
 	
+	
+	
 	private Client client;
 	
 }
