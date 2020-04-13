@@ -9,12 +9,12 @@ import lombok.ToString;
 
 
 @Data
-@AllArgsConstructor @NoArgsConstructor @ToString
+
 public class Article {
   
 	private String idArt;
 	private String designtationArt;
-	
+	private String imageName;
 	private Avis avisArt ; 
 
 	

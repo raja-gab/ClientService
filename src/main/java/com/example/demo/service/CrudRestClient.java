@@ -32,6 +32,9 @@ public interface CrudRestClient {
 	
 	@GetMapping("/article")
 	public Resources<Article> findAllArticle();
+	
+	@PostMapping("/article")
+	public Optional<Article>  postArticle (@RequestBody Article article);
 
 	@GetMapping("/avis/{id}")
 	public Optional<Avis> findAvisById(@PathVariable("id") String id );
