@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.entity.Article;
 import com.example.demo.entity.Avis;
+import com.example.demo.entity.Commande;
 import com.example.demo.entity.Reclamation;
 
-@FeignClient(name = "CrudApplication" , url = "http://localhost:8009/CrudApplication")
+@FeignClient(name = "CrudApplication")
 public interface CrudRestService {
 	
 	@GetMapping("/getproduct/{id}")
@@ -23,6 +24,8 @@ public interface CrudRestService {
 	
 	@PostMapping("/reclamation")
 	public Optional<Avis> postReclamation( @RequestBody Reclamation reclamation);
+	@PostMapping("/commande")
+	public Commande postCommande (@RequestBody Commande commande);
 	
 	
 

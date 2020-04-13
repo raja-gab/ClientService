@@ -3,6 +3,7 @@ package com.example.demo.entity;
 
 import java.time.LocalDate;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,12 @@ public class Commande {
 	private LocalDate dateCmd; 
 	private double totalCmd; 
 	private String modePaiement;
+	private LigneCommande ligneCmd ; 
+	
+	private Client clientCmd;
+	
+	private LigneLivraison ligneLivraisonCmd;
+
 	
 
 	
