@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Client {
-
-	private String cinCli; 
+public class Client extends Utilisateur {
 	
+	
+	private String cinCli; 
 	private String adresseCli;
 	private String numTelCli;
 	

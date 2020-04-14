@@ -3,8 +3,7 @@ package com.example.demo.entity;
 import java.time.LocalDate;
 import java.util.Date;
 
-
-
+import feign.Client;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

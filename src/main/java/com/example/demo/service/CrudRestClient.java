@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.entity.Article;
 import com.example.demo.entity.Avis;
+import com.example.demo.entity.Client;
 import com.example.demo.entity.Commande;
 import com.example.demo.entity.Reclamation;
+
+
 import org.springframework.hateoas.Resources;
 
 
@@ -57,9 +60,11 @@ public interface CrudRestClient {
 	@PostMapping("/commande")
 	public Commande postCommande (@RequestBody Commande commande);
 	
+	@PutMapping("/client/{id}")
+	public Optional<Client> updatClient(@RequestBody Client client,@PathVariable String id);
 	
-	
-	
+	@PostMapping("/client")
+	public Client addClient (@RequestBody Client client);	
 	
 	
 	
