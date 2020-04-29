@@ -3,6 +3,7 @@ package com.example.demo.entity;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 import feign.Client;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ public class Commande {
 	private LocalDate dateCmd; 
 	private double totalCmd; 
 	private String modePaiement;
-	private LigneCommande ligneCmd ; 
+	private List<LigneCommande> ligneCmd ; 
 	
 	private Client clientCmd;
 	

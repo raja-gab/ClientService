@@ -1,4 +1,6 @@
 package com.example.demo.controller;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,18 +11,27 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Client;
-
+import com.example.demo.entity.Article;
 import com.example.demo.entity.Avis;
 import com.example.demo.entity.Commande;
+import com.example.demo.entity.Facture;
+import com.example.demo.entity.Fournisseur;
+import com.example.demo.entity.LigneCommande;
+import com.example.demo.entity.Marque;
+import com.example.demo.entity.Order;
 import com.example.demo.entity.Reclamation;
+import com.example.demo.entity.SousCategorie;
 import com.example.demo.service.CrudRestClient;
+import com.example.demo.service.PaymentRestClient;
+import com.paypal.api.payments.Payment;
 
 @RestController
 public class ClientController {
 
 	@Autowired
 	private CrudRestClient crudRest;
-	
+	@Autowired
+	private PaymentRestClient paymentRest;
 	// Gestion Avis 
 	
 	@PostMapping("/avis")
@@ -81,6 +92,7 @@ public class ClientController {
 	@PostMapping("/addcommande")
 	public Commande addCommande (@RequestBody Commande commande) {
 		Commande cmd = new Commande();
+		
 		cmd.setIdCmd(commande.getIdCmd());
 		cmd.setDateCmd(commande.getDateCmd());
 		cmd.setTotalCmd(commande.getTotalCmd());
@@ -88,12 +100,43 @@ public class ClientController {
 		cmd.setLigneCmd(commande.getLigneCmd());
 		cmd.setClientCmd(commande.getClientCmd());
 		cmd.setLigneLivraisonCmd(commande.getLigneLivraisonCmd());
+		
+        List<LigneCommande> a = new ArrayList<>();
+        a = cmd.getLigneCmd();
+        for (LigneCommande e : a) {
+		Article article = crudRest.findArticleById(e.getArticle().getIdArt());
+		int ns =article.getQteStockArt()-e.getQteArtLC();
+		Article art = new Article();
+		art.setDesigntationArt(article.getDesigntationArt());
+		art.setDescriptionArt(article.getDescriptionArt());
+		art.setImageModel(article.getImageModel());
+		art.setPrixArt(article.getPrixArt());
+		art.setQteStockArt(ns);
+		art.setTauxRemiseArt(article.getTauxRemiseArt());
+	    Marque m = crudRest.findMarqueById(article.getMarqueArt().getIdMarq());
+		art.setMarqueArt(m);
+		SousCategorie sousCat = crudRest.findSousCategorieById(article.getSousCategorieArt().getIdSousCat());
+		art.setSousCategorieArt(sousCat);
+		Fournisseur f = crudRest.findFournisseurById(article.getFournisseurArt().getUsername());
+		art.setFournisseurArt(f);
+		
+        
+			
+		crudRest.updatArticle(art,e.getArticle().getIdArt());
+        }
 
 
 		
 		crudRest.postCommande(cmd);
 		return cmd ;
 	}
+	@PostMapping("addfacture")
+	public  Facture addfacture (@RequestBody Payment payment)
+	{
+		Facture facture = new Facture ();
+		return facture;
+	}
+
 	
 	/*Manager
 	 *client
@@ -107,7 +150,7 @@ public class ClientController {
 		clt.setPrenom(client.getPrenom());
 		clt.setCinCli(client.getCinCli());
 		clt.setNumTelCli(client.getNumTelCli());
-		clt.setLogin(client.getLogin());
+		clt.setUsername(client.getUsername());
 		clt.setPassword(client.getPassword());
 		crudRest.addClient(clt);
 		return clt ;
@@ -121,7 +164,8 @@ public class ClientController {
 				Client clt = new Client();
 				clt.setNumTelCli(client.getNumTelCli());
 				clt.setAdresseCli(client.getAdresseCli());
-				clt.setLogin(client.getLogin());
+				clt.setUsername(client.getUsername());
+
 				clt.setPassword(client.getPassword());
 				clt.setNom(client.getNom());
 				clt.setPrenom(client.getPrenom());

@@ -14,8 +14,10 @@ import com.example.demo.entity.Article;
 import com.example.demo.entity.Avis;
 import com.example.demo.entity.Client;
 import com.example.demo.entity.Commande;
+import com.example.demo.entity.Fournisseur;
+import com.example.demo.entity.Marque;
 import com.example.demo.entity.Reclamation;
-
+import com.example.demo.entity.SousCategorie;
 
 import org.springframework.hateoas.Resources;
 
@@ -27,6 +29,8 @@ public interface CrudRestClient {
 	
 	@GetMapping("/getproduct/{id}")
 	public Optional<Article> getArticleById();
+	@GetMapping("/article/{id}")
+	public Article findArticleById(@PathVariable("id") String id );
 	
 	
 	@PostMapping("/reclamation")
@@ -66,11 +70,15 @@ public interface CrudRestClient {
 	@PostMapping("/client")
 	public Client addClient (@RequestBody Client client);	
 	
+	@PutMapping("/article/{id}")
+	public Article  updatArticle (@RequestBody Article article , @PathVariable("id") String id);
 	
-	
-	
-	
-	
+	@GetMapping ("/marque/{id}")
+	public Marque findMarqueById(@PathVariable ("id") String id );
+	@GetMapping ("/souscategorie/{id}")
+	public SousCategorie findSousCategorieById(@PathVariable ("id") String id );
+	@GetMapping ("/fournisseur/{id}")
+	public Fournisseur findFournisseurById (@PathVariable ("id") String id);
 	
 	
 	

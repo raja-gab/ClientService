@@ -18,6 +18,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/addcommande/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/**").permitAll();
+
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/commande/**").permitAll();
         http.authorizeRequests().antMatchers( "/avis/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/article/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/reclamation/**").permitAll();
@@ -27,9 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(HttpMethod.PUT, "/modifyclient/**").permitAll();
        
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/reclamation/{id}/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/addcommande/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/commande/**").permitAll();
-
+       
 
        
         http.authorizeRequests().anyRequest().authenticated();
