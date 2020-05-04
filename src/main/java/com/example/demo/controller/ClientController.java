@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resources;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,11 +39,16 @@ public class ClientController {
 	@PostMapping("/avis")
 	public Avis avis( @RequestBody Avis avis) {
 		Avis avs = new Avis();
+		avs.setIdAvis(avis.getIdAvis());
 		avs.setAvis(avis.getAvis());
 		avs.setDateAvis(java.time.LocalDate.now());
 		avs.setClient(avis.getClient());
 		crudRest.postAvis(avs);
 		return avs ;
+	}
+	@GetMapping("/avis")
+	public Resources<Avis> getAllAvis(){
+		return crudRest.findAllAvis();
 	}
 
 	@PutMapping("/avis/{id}")
@@ -75,7 +82,10 @@ public class ClientController {
 		crudRest.postReclamation(rec);
 		return rec ;
 	}
-	
+	@GetMapping("/reclamation")
+	public Resources<Reclamation> getAllReclamation(){
+		return crudRest.findAllReclamation();
+	}
 	@PutMapping("/reclamation/{id}")
 	public Reclamation modifyReclamation(@RequestBody Reclamation reclamation ,@PathVariable("id") String id) {
 		Reclamation rec = new Reclamation();
@@ -89,7 +99,9 @@ public class ClientController {
 	public void deleteReclamationById(@PathVariable("id") String id){
 		crudRest.deleteReclamationById(id);
 	}
-	@PostMapping("/addcommande")
+	
+	// Commande 
+	@PostMapping("/commande")
 	public Commande addCommande (@RequestBody Commande commande) {
 		Commande cmd = new Commande();
 		
@@ -119,23 +131,13 @@ public class ClientController {
 		art.setSousCategorieArt(sousCat);
 		Fournisseur f = crudRest.findFournisseurById(article.getFournisseurArt().getUsername());
 		art.setFournisseurArt(f);
-		
-        
-			
 		crudRest.updatArticle(art,e.getArticle().getIdArt());
         }
 
-
-		
 		crudRest.postCommande(cmd);
 		return cmd ;
 	}
-	@PostMapping("addfacture")
-	public  Facture addfacture (@RequestBody Payment payment)
-	{
-		Facture facture = new Facture ();
-		return facture;
-	}
+	
 
 	
 	/*Manager
@@ -143,13 +145,13 @@ public class ClientController {
 	 */
 	
 	//add Client just for test
-	@PostMapping("/addclient")
+	@PostMapping("/client")
 	public Client addClient (@RequestBody Client client) {
 		Client clt = new Client();
 		clt.setNom(client.getNom());
 		clt.setPrenom(client.getPrenom());
-		clt.setCinCli(client.getCinCli());
-		clt.setNumTelCli(client.getNumTelCli());
+		clt.setCin(client.getCin());
+		clt.setPhoneNumber(client.getPhoneNumber());
 		clt.setUsername(client.getUsername());
 		clt.setPassword(client.getPassword());
 		crudRest.addClient(clt);
@@ -158,12 +160,12 @@ public class ClientController {
 	
 	
 	//update Client
-	@PutMapping("/modifyclient/{id}")
+	@PutMapping("/client/{id}")
 	public Client modifyFour(@RequestBody Client client , @PathVariable("id") String id) {
 		
 				Client clt = new Client();
-				clt.setNumTelCli(client.getNumTelCli());
-				clt.setAdresseCli(client.getAdresseCli());
+				clt.setPhoneNumber(client.getPhoneNumber());
+				clt.setCin(client.getCin());
 				clt.setUsername(client.getUsername());
 
 				clt.setPassword(client.getPassword());
@@ -173,6 +175,11 @@ public class ClientController {
 					
 		crudRest.updatClient(clt,id);
 		return clt;	
+	}
+	
+	@GetMapping("/client/{id}")
+	public Optional<Client> getClientById(@PathVariable("id") String id ){
+		return crudRest.findClientById(id);
 	}
 	
 }

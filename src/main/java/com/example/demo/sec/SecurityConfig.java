@@ -17,22 +17,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
+       
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/addcommande/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/**").permitAll();
-
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/commande/**").permitAll();
-        http.authorizeRequests().antMatchers( "/avis/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/article/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/reclamation/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/reclamation/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/article/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/addclient/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/modifyclient/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/commande/**").hasAuthority("USER");
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/commande/**").hasAuthority("USER");
+        http.authorizeRequests().antMatchers("/reclamation/**").hasAuthority("USER");
+        http.authorizeRequests().antMatchers("/avis/**").hasAuthority("USER");
+        http.authorizeRequests().antMatchers("/client/**").hasAuthority("USER");
        
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/reclamation/{id}/**").permitAll();
-       
-
+        
+      
        
         http.authorizeRequests().anyRequest().authenticated();
        http.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

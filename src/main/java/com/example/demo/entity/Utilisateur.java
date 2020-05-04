@@ -13,6 +13,6 @@ public class Utilisateur {
 	private String password ; 
 	private String nom;
 	private String prenom;
-	private String role; 
+	
 
 }

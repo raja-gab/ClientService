@@ -27,21 +27,18 @@ import org.springframework.hateoas.Resources;
 @FeignClient(name = "CrudApplication" )
 public interface CrudRestClient {
 	
-	@GetMapping("/getproduct/{id}")
-	public Optional<Article> getArticleById();
+	
 	@GetMapping("/article/{id}")
 	public Article findArticleById(@PathVariable("id") String id );
 	
-	
-	@PostMapping("/reclamation")
-	public Optional<Avis> postReclamation( @RequestBody Reclamation reclamation);
-	
-	
+
 	@GetMapping("/article")
 	public Resources<Article> findAllArticle();
 	
-	@PostMapping("/article")
-	public Optional<Article>  postArticle (@RequestBody Article article);
+	@PutMapping("/article/{id}")
+	public Article updatArticle(Article article , @PathVariable("id") String id);
+	
+	// Feign Avis
 
 	@GetMapping("/avis/{id}")
 	public Optional<Avis> findAvisById(@PathVariable("id") String id );
@@ -50,19 +47,37 @@ public interface CrudRestClient {
 	@PostMapping("/avis")
 	public Optional<Avis> postAvis( @RequestBody Avis avis);
 	
+	@GetMapping("/avis")
+	public Resources<Avis> findAllAvis();
+	
+	
 	@PutMapping("/avis/{id}")
 	public Avis modifyAvis(@RequestBody Avis avis ,@PathVariable("id") String id);
 	
 	@DeleteMapping("/avis/{id}")
 	public void deleteById(@PathVariable("id") String id);
 	
+	// Feign Reclamation
+	
+	@GetMapping("/reclamation")
+	public Resources<Reclamation> findAllReclamation();
+	
+	
 	@PutMapping("/reclamation/{id}")
 	public Avis modifyReclamation(@RequestBody Reclamation reclamation ,@PathVariable("id") String id);
 	
+	@PostMapping("/reclamation")
+	public Optional<Avis> postReclamation( @RequestBody Reclamation reclamation);
+	
 	@DeleteMapping("/reclamation/{id}")
 	public void deleteReclamationById(@PathVariable("id") String id);
+	
+	// Feign Commande
+	
 	@PostMapping("/commande")
 	public Commande postCommande (@RequestBody Commande commande);
+	
+	// Feign Client
 	
 	@PutMapping("/client/{id}")
 	public Optional<Client> updatClient(@RequestBody Client client,@PathVariable String id);
@@ -70,23 +85,23 @@ public interface CrudRestClient {
 	@PostMapping("/client")
 	public Client addClient (@RequestBody Client client);	
 	
-	@PutMapping("/article/{id}")
-	public Article  updatArticle (@RequestBody Article article , @PathVariable("id") String id);
+	@GetMapping("/client/{id}")
+	public Optional<Client> findClientById(@PathVariable("id") String id );
 	
 	@GetMapping ("/marque/{id}")
 	public Marque findMarqueById(@PathVariable ("id") String id );
+	
+	// Feign SousCategorie
 	@GetMapping ("/souscategorie/{id}")
 	public SousCategorie findSousCategorieById(@PathVariable ("id") String id );
+	
+	//Feign Fourniseeur
+	
 	@GetMapping ("/fournisseur/{id}")
 	public Fournisseur findFournisseurById (@PathVariable ("id") String id);
 	
 	
 	
 	
-	/*@PostMapping("/avis")
-	public Avis avis( @RequestBody Avis avis);
 	
-	@PostMapping("/reclamation/{id}")
-	public Reclamation reclamation(@RequestBody Reclamation relamaction , @PathVariable("id") String idCmd);
-	*/
 }
