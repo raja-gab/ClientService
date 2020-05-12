@@ -13,18 +13,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Commande {
-	private String idCmd; 
+	private String id;        
+	private String mat;
 	private LocalDate dateCmd; 
 	private double totalCmd; 
 	private String modePaiement;
 	private List<LigneCommande> ligneCmd ; 
-	
 	private Client clientCmd;
-	
 	private LigneLivraison ligneLivraisonCmd;
 
 	
-
+	public String getId( ) {
+        return this.mat;
+    }
 	
 	
 }

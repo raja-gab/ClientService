@@ -9,7 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Categorie {
 	
-	private String _id;
+	private String id;        
+	private String mat;
 	private String libelleCat;
+	
+	public String getId( ) {
+        return this.mat;
+    }
 
 }

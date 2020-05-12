@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ImageModel {
 	
-	private String id;
+	private String id;        
+	private String mat;
 
 	private String name;
 
@@ -22,5 +23,8 @@ public class ImageModel {
 		this.type = type;
 		this.picByte = picByte;
 	}
+	public String getId( ) {
+        return this.mat;
+    }
 
 }

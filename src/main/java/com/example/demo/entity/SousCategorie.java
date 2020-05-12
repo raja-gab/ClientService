@@ -13,10 +13,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SousCategorie {
 	
-	private String idSousCat;
+	private String id;        
+	private String mat;
+	
 	private String libelleSousCat;
 	private List <String> valeur ; 
 	
 	private Categorie categorie ; 
+	public String getId( ) {
+        return this.mat;
+    }
 
 }

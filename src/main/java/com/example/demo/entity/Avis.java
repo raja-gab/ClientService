@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import feign.Client;
 import lombok.AllArgsConstructor;
@@ -12,12 +11,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Avis {
-	private String idAvis ;
+	
+	private String id;        
+	private String mat;
 	private String avis ; 
 	private LocalDate dateAvis ; 
 	
-	
-	
 	private Client client;
+	
+	public String getId( ) {
+        return this.mat;
+    }
 	
 }

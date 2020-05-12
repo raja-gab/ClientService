@@ -9,10 +9,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LigneCommande {
-	private String idLC;
+	
+	private String id;        
+	private String mat;
 	private int qteArtLC ;
 	
 	private Article article ;
+	
+	public String getId( ) {
+        return this.mat;
+    }
+	
 
 
 }

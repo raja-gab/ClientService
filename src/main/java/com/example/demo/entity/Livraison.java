@@ -9,7 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Livraison {
-	private String idLiv;
+	private String id;        
+	private String mat;
 	private String modeLiv ; 
 
+
+	public String getId( ) {
+        return this.mat;
+    }
 }

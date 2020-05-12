@@ -10,10 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LigneLivraison {
-	private String idEL ;
+	private String id;        
+	private String mat;
 	private Date dateLiv;
 	
 	private Livraison livraison;
-
+	
+	public String getId( ) {
+        return this.mat;
+    }
 
 }

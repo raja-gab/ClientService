@@ -11,15 +11,18 @@ import lombok.Data;
 @Data
 public class Facture {
 	
-	@Id
-	private String idFcat; 
+	private String id;        
+	private String mat;
 	private Date dateFact; 
 	private double tva;
 	private double remiseFact; 
 	private double totalTva; 
 	private double totalTtc; 
-	
 	private Commande commandeLiv;
+	
+	public String getId( ) {
+        return this.mat;
+    }
 	
 	
 

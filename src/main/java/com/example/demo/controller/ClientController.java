@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Client;
 import com.example.demo.entity.Article;
 import com.example.demo.entity.Avis;
+import com.example.demo.entity.Categorie;
 import com.example.demo.entity.Commande;
 import com.example.demo.entity.Facture;
 import com.example.demo.entity.Fournisseur;
@@ -39,7 +40,8 @@ public class ClientController {
 	@PostMapping("/avis")
 	public Avis avis( @RequestBody Avis avis) {
 		Avis avs = new Avis();
-		avs.setIdAvis(avis.getIdAvis());
+		avs.setId(avis.getId());
+		avs.setMat(avis.getMat());
 		avs.setAvis(avis.getAvis());
 		avs.setDateAvis(java.time.LocalDate.now());
 		avs.setClient(avis.getClient());
@@ -105,7 +107,8 @@ public class ClientController {
 	public Commande addCommande (@RequestBody Commande commande) {
 		Commande cmd = new Commande();
 		
-		cmd.setIdCmd(commande.getIdCmd());
+		cmd.setId(commande.getId());
+		cmd.setMat(commande.getMat());
 		cmd.setDateCmd(commande.getDateCmd());
 		cmd.setTotalCmd(commande.getTotalCmd());
 		cmd.setModePaiement(commande.getModePaiement());
@@ -116,7 +119,7 @@ public class ClientController {
         List<LigneCommande> a = new ArrayList<>();
         a = cmd.getLigneCmd();
         for (LigneCommande e : a) {
-		Article article = crudRest.findArticleById(e.getArticle().getIdArt());
+		Article article = crudRest.findArticleById(e.getArticle().getId());
 		int ns =article.getQteStockArt()-e.getQteArtLC();
 		Article art = new Article();
 		art.setDesigntationArt(article.getDesigntationArt());
@@ -125,13 +128,13 @@ public class ClientController {
 		art.setPrixArt(article.getPrixArt());
 		art.setQteStockArt(ns);
 		art.setTauxRemiseArt(article.getTauxRemiseArt());
-	    Marque m = crudRest.findMarqueById(article.getMarqueArt().getIdMarq());
+	    Marque m = crudRest.findMarqueById(article.getMarqueArt().getId());
 		art.setMarqueArt(m);
-		SousCategorie sousCat = crudRest.findSousCategorieById(article.getSousCategorieArt().getIdSousCat());
+		SousCategorie sousCat = crudRest.findSousCategorieById(article.getSousCategorieArt().getId());
 		art.setSousCategorieArt(sousCat);
 		Fournisseur f = crudRest.findFournisseurById(article.getFournisseurArt().getUsername());
 		art.setFournisseurArt(f);
-		crudRest.updatArticle(art,e.getArticle().getIdArt());
+		crudRest.updatArticle(art,e.getArticle().getId());
         }
 
 		crudRest.postCommande(cmd);
@@ -167,7 +170,6 @@ public class ClientController {
 				clt.setPhoneNumber(client.getPhoneNumber());
 				clt.setCin(client.getCin());
 				clt.setUsername(client.getUsername());
-
 				clt.setPassword(client.getPassword());
 				clt.setNom(client.getNom());
 				clt.setPrenom(client.getPrenom());
@@ -181,5 +183,46 @@ public class ClientController {
 	public Optional<Client> getClientById(@PathVariable("id") String id ){
 		return crudRest.findClientById(id);
 	}
+	
+	// liste : Marque + Catégorie + sous catégorie + Article 
+	
+	@GetMapping("/article")
+	public Resources<Article> getAllArticle(){
+		return crudRest.findAllArticle();
+	}
+	@GetMapping("/article/{id}")
+	public Article getAllArticleById(@PathVariable("id") String id ){
+		return crudRest.findArticleById(id);
+	}
+	
+	@GetMapping("/marque")
+	public Resources <Marque> getAllMarque(){
+		return crudRest.findAllMarque();
+	}
+	@GetMapping("/marque/{id}")
+	public Marque getAllMarqueById(@PathVariable("id") String id ){
+		return crudRest.findMarqueById(id);
+	}
+	
+	@GetMapping("/categorie")
+	public Resources <Categorie> getAllCategorie(){
+		return crudRest.findAllCategorie();
+	}
+	@GetMapping("/categorie/{id}")
+	public Categorie getAllCategorieById(@PathVariable("id") String id ){
+		return crudRest.findCategorieById(id);
+	}
+	
+	@GetMapping("/souscategorie")
+	public Resources <SousCategorie> getAllSousCategorie(){
+		return crudRest.findAllSousCategorie();
+		}
+	@GetMapping("/souscategorie/{id}")
+	public SousCategorie getAllSousCategorieById(@PathVariable("id") String id ){
+		return crudRest.findSousCategorieById(id);
+	}
+
+	
+	
 	
 }

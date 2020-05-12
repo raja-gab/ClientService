@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.entity.Article;
 import com.example.demo.entity.Avis;
+import com.example.demo.entity.Categorie;
 import com.example.demo.entity.Client;
 import com.example.demo.entity.Commande;
 import com.example.demo.entity.Fournisseur;
@@ -45,7 +46,7 @@ public interface CrudRestClient {
 	
 	
 	@PostMapping("/avis")
-	public Optional<Avis> postAvis( @RequestBody Avis avis);
+	public Avis postAvis( @RequestBody Avis avis);
 	
 	@GetMapping("/avis")
 	public Resources<Avis> findAllAvis();
@@ -88,10 +89,18 @@ public interface CrudRestClient {
 	@GetMapping("/client/{id}")
 	public Optional<Client> findClientById(@PathVariable("id") String id );
 	
+	// Feign Marque 
+	
+	@GetMapping("/marque")
+	public Resources<Marque> findAllMarque();
+	
 	@GetMapping ("/marque/{id}")
 	public Marque findMarqueById(@PathVariable ("id") String id );
 	
 	// Feign SousCategorie
+	@GetMapping("/souscategorie")
+	public Resources<SousCategorie> findAllSousCategorie();
+	
 	@GetMapping ("/souscategorie/{id}")
 	public SousCategorie findSousCategorieById(@PathVariable ("id") String id );
 	
@@ -100,6 +109,16 @@ public interface CrudRestClient {
 	@GetMapping ("/fournisseur/{id}")
 	public Fournisseur findFournisseurById (@PathVariable ("id") String id);
 	
+	// Feign  Catégorie 
+	@GetMapping("/categorie")
+	public Resources<Categorie> findAllCategorie();
+	
+	@GetMapping ("/categorie/{id}")
+	public Categorie findCategorieById(@PathVariable ("id") String id );
+	
+	
+	
+
 	
 	
 	

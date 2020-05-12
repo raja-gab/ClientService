@@ -8,7 +8,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Marque {
-	private String idMarq;
+	private String id;        
+	private String mat;
 	private String libelleMarq;
+	
+	
+	public String getId( ) {
+        return this.mat;
+    }
 
 }
