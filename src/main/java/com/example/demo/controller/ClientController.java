@@ -37,17 +37,30 @@ public class ClientController {
 	private PaymentRestClient paymentRest;
 	// Gestion Avis 
 	
-	@PostMapping("/avis")
+	/*@PostMapping("/avis")
 	public Avis avis( @RequestBody Avis avis) {
 		Avis avs = new Avis();
 		avs.setId(avis.getId());
 		avs.setMat(avis.getMat());
 		avs.setAvis(avis.getAvis());
 		avs.setDateAvis(java.time.LocalDate.now());
-		avs.setClient(avis.getClient());
+		Client c = crudRest.findClientById(avis.getClient().getMat());
+		avs.setClient(c);
 		crudRest.postAvis(avs);
 		return avs ;
+	}*/
+	@PutMapping("/article/{id}")
+	public Article updateArtAvis(@RequestBody Article artice ,@PathVariable("id") String id)
+	{
+		System.out.println("///////////////////////");
+		Article a = crudRest.findArticleById(id);
+		Avis avis = crudRest.postAvis(artice.getAvisArt());
+		avis.setDateAvis(java.time.LocalDateTime.now());
+		a.setAvisArt(avis);
+		crudRest.updatArticle(a, id);
+		return a; 
 	}
+	
 	@GetMapping("/avis")
 	public Resources<Avis> getAllAvis(){
 		return crudRest.findAllAvis();
@@ -55,7 +68,7 @@ public class ClientController {
 
 	@PutMapping("/avis/{id}")
 	public Avis modifyAvis(@RequestBody Avis avis ,@PathVariable("id") String id) {
-		Optional<Avis> a = crudRest.findAvisById(id);
+		Avis a = crudRest.findAvisById(id);
 		Avis as = new Avis();
 		as.setDateAvis(avis.getDateAvis());
 		as.setAvis(avis.getAvis());
@@ -180,7 +193,7 @@ public class ClientController {
 	}
 	
 	@GetMapping("/client/{id}")
-	public Optional<Client> getClientById(@PathVariable("id") String id ){
+	public Client getClientById(@PathVariable("id") String id ){
 		return crudRest.findClientById(id);
 	}
 	
@@ -222,6 +235,7 @@ public class ClientController {
 		return crudRest.findSousCategorieById(id);
 	}
 
+	
 	
 	
 	

@@ -26,6 +26,7 @@ public class Article {
 	private SousCategorie sousCategorieArt;
 	private Fournisseur fournisseurArt;
 	private ImageModel imageModel ;
+	private Avis avisArt ; 
 	
 	public String getId( ) {
         return this.mat;

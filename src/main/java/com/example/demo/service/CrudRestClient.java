@@ -42,7 +42,7 @@ public interface CrudRestClient {
 	// Feign Avis
 
 	@GetMapping("/avis/{id}")
-	public Optional<Avis> findAvisById(@PathVariable("id") String id );
+	public Avis findAvisById(@PathVariable("id") String id );
 	
 	
 	@PostMapping("/avis")
@@ -87,7 +87,7 @@ public interface CrudRestClient {
 	public Client addClient (@RequestBody Client client);	
 	
 	@GetMapping("/client/{id}")
-	public Optional<Client> findClientById(@PathVariable("id") String id );
+	public Client findClientById(@PathVariable("id") String id );
 	
 	// Feign Marque 
 	

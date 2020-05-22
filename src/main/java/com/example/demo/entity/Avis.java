@@ -1,8 +1,8 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import feign.Client;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ public class Avis {
 	private String id;        
 	private String mat;
 	private String avis ; 
-	private LocalDate dateAvis ; 
+	private LocalDateTime dateAvis ; 
 	
 	private Client client;
 	
