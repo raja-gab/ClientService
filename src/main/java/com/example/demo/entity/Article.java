@@ -25,7 +25,8 @@ public class Article {
 	private Marque marqueArt;
 	private SousCategorie sousCategorieArt;
 	private Fournisseur fournisseurArt;
-	private ImageModel imageModel ;
+	private String imageName; 
+	//private ImageModel imageModel ;
 	private Avis avisArt ; 
 	
 	public String getId( ) {

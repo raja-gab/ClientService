@@ -137,7 +137,8 @@ public class ClientController {
 		Article art = new Article();
 		art.setDesigntationArt(article.getDesigntationArt());
 		art.setDescriptionArt(article.getDescriptionArt());
-		art.setImageModel(article.getImageModel());
+		//art.setImageModel(article.getImageModel());
+		art.setImageName(article.getImageName());
 		art.setPrixArt(article.getPrixArt());
 		art.setQteStockArt(ns);
 		art.setTauxRemiseArt(article.getTauxRemiseArt());
